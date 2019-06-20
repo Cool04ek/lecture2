@@ -7,11 +7,11 @@ sudo yum -y install wget
 sudo yum -y install java-1.8.0-openjdk
 sudo yum -y install setroubleshoot setools
 sudo wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo
-sudo wget -O /etc/yum.repos.d/nginx.repo https://raw.githubusercontent.com/Cool04ek/lecture2/master/lecture2/nginx.repo
+sudo wget -O /etc/yum.repos.d/nginx.repo https://raw.githubusercontent.com/zulus911/lectures/master/lecture2/nginx.repo
 sudo rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key
 sudo yum -y install jenkins nginx net-tools policycoreutils-python
-sudo wget -O /etc/sysconfig/jenkins https://raw.githubusercontent.com/Cool04ek/lecture2/master/lecture2/jenkins
-sudo wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/Cool04ek/lecture2/master/lecture2/default.conf
+sudo wget -O /etc/sysconfig/jenkins https://raw.githubusercontent.com/zulus911/lectures/master/lecture2/jenkins
+sudo wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/zulus911/lectures/master/lecture2/default.conf
 sudo setsebool -P httpd_can_network_connect 1
 sudo semanage port -a -t http_port_t -p tcp 2222
 sudo setsebool -P nis_enabled 1
