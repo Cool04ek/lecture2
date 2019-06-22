@@ -10,7 +10,6 @@ sudo yum -y install nginx net-tools policycoreutils-python
 sudo wget -O /etc/nginx/conf.d/default.conf https://raw.githubusercontent.com/Cool04ek/lecture2/master/lecture2/default.conf
 sudo setsebool -P httpd_can_network_connect 1
 sudo semanage port -a -t http_port_t -p tcp 2222
-sudo setsebool -P nis_enabled 1
 sudo systemctl start nginx
 EOF
 
@@ -26,7 +25,6 @@ sudo yum -y install jenkins net-tools policycoreutils-python
 sudo wget -O /etc/sysconfig/jenkins https://raw.githubusercontent.com/Cool04ek/lecture2/master/lecture2/jenkins
 sudo setsebool -P httpd_can_network_connect 1
 sudo semanage port -a -t http_port_t -p tcp 2222
-sudo setsebool -P nis_enabled 1
 sudo service jenkins start
 EOF
 
@@ -34,7 +32,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "nginx-vg" do |nginx|
     nginx.vm.box = "centos/7"
     nginx.vm.hostname = "stan.box"
-    nginx.vm.network :private_network, ip:"192.168.14.88", virtualbox__intnet: true
+    nginx.vm.network :private_network, ip:"192.168.14.88"
     nginx.vm.network :public_network, bridge: "en0: Wi-Fi (AirPort)", use_dhcp_assigned_default_route: true
 
     nginx.vm.provision "shell", inline: $script_ng
@@ -42,16 +40,14 @@ Vagrant.configure("2") do |config|
 
   config.vm.define "jenkins1-vg" do |jenkins1|
     jenkins1.vm.box = "centos/7"
-    jenkins1.vm.hostname = "stan.box"
-    jenkins1.vm.network :private_network, ip:"192.168.0.14", virtualbox__intnet: true
+    jenkins1.vm.network :private_network, ip:"192.168.14.11"
 
     jenkins1.vm.provision "shell", inline: $script_jk
   end
 
   config.vm.define "jenkins2-vg" do |jenkins2|
     jenkins2.vm.box = "centos/7"
-    jenkins2.vm.hostname = "stan.box"
-    jenkins2.vm.network :private_network, ip:"192.168.0.88", virtualbox__intnet: true
+    jenkins2.vm.network :private_network, ip:"192.168.14.12"
 
     jenkins2.vm.provision "shell", inline: $script_jk
   end
