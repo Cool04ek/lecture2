@@ -34,7 +34,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "nginx-vg" do |nginx|
     nginx.vm.box = "centos/7"
     nginx.vm.hostname = "stan.box"
-    nginx.vm.network :private_network, ip:"192.168.14.88"
+    nginx.vm.network :private_network, ip:"192.168.14.88", virtualbox__intnet: true
     nginx.vm.network :public_network, bridge: "en0: Wi-Fi (AirPort)", use_dhcp_assigned_default_route: true
 
     nginx.vm.provision "shell", inline: $script_ng
@@ -43,7 +43,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "jenkins1-vg" do |jenkins1|
     jenkins1.vm.box = "centos/7"
     jenkins1.vm.hostname = "stan.box"
-    jenkins1.vm.network :private_network, ip:"192.168.0.14"
+    jenkins1.vm.network :private_network, ip:"192.168.0.14", virtualbox__intnet: true
 
     jenkins1.vm.provision "shell", inline: $script_jk
   end
@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "jenkins2-vg" do |jenkins2|
     jenkins2.vm.box = "centos/7"
     jenkins2.vm.hostname = "stan.box"
-    jenkins2.vm.network :private_network, ip:"192.168.0.88"
+    jenkins2.vm.network :private_network, ip:"192.168.0.88", virtualbox__intnet: true
 
     jenkins2.vm.provision "shell", inline: $script_jk
   end
